@@ -1,56 +1,45 @@
 # RestauPlanning
 
-Application de gestion des horaires et planning du personnel pour restaurant.
+![Version](https://img.shields.io/badge/version-1.0.0-blue.svg)
+![License](https://img.shields.io/badge/license-MIT-green.svg)
 
-## Fonctionnalités
+Application web de gestion des horaires et planning du personnel pour restaurants. Cette application permet de simplifier l'organisation des équipes, optimiser les coûts et améliorer la satisfaction des employés.
+
+## 📋 Fonctionnalités
 
 - **Tableau de bord** : Vue d'ensemble du planning, statistiques et alertes
 - **Gestion du personnel** : Informations sur les employés, disponibilités et compétences
-- **Planning hebdomadaire** : Visualisation et gestion des horaires
+- **Planning hebdomadaire** : Visualisation et gestion des horaires du personnel
 - **Prévisions d'activité** : Basées sur l'historique et les événements spéciaux
-- **Alertes automatiques** : Congés à venir, conflits d'horaires, etc.
+- **Alertes automatiques** : Congés à venir, conflits d'horaires, conformité légale
 - **Génération automatique** : Création automatique de plannings en respectant les contraintes
 
-## Structure du projet
+## 🚀 Installation et démarrage
 
-Le projet est organisé comme suit:
+### Prérequis
 
-```
-restau-planning/
-├── src/
-│   ├── model/         # Modèles de données
-│   ├── utils/         # Fonctions utilitaires
-│   ├── components/    # Composants UI
-│   ├── store/         # Gestion de l'état (avec Zustand ou Pinia)
-│   └── views/         # Vues/Pages de l'application
-└── public/            # Ressources statiques
-```
+- Node.js (v14.0.0 ou supérieur)
+- npm (v6.0.0 ou supérieur)
 
-## Technologies utilisées
+### Installation
 
-- **Frontend**: Javascript/Vue.js ou React
-- **Gestion d'état**: Zustand (React) ou Pinia (Vue.js)
-- **Stockage**: localStorage, éventuellement une API backend
-- **UI**: CSS personnalisé ou framework UI (Tailwind, Bootstrap)
-
-## Installation et utilisation
-
-### Installation des dépendances
-
+1. Clonez le dépôt
 ```bash
-# Cloner le dépôt
 git clone https://github.com/dimiloud/restau-planning.git
 cd restau-planning
+```
 
-# Installer les dépendances
+2. Installez les dépendances
+```bash
 npm install
 ```
 
-### Lancer l'application en développement
-
+3. Lancez l'application en mode développement
 ```bash
-npm run dev
+npm start
 ```
+
+L'application sera accessible à l'adresse [http://localhost:3000](http://localhost:3000).
 
 ### Construire pour la production
 
@@ -58,27 +47,67 @@ npm run dev
 npm run build
 ```
 
-## Options d'intégration
+Cette commande génère une version optimisée de l'application dans le dossier `build/`.
 
-### Version Web
+## 🔧 Personnalisation
 
-L'application peut être déployée comme un site web classique accessible depuis n'importe quel navigateur.
+### Données initiales
 
-### Version Mobile
+Les données initiales du restaurant sont définies dans le fichier `src/model/donnees.js`. Vous pouvez les modifier selon vos besoins:
 
-Pour une version mobile, le code peut être adapté pour:
-- Une Progressive Web App (PWA)
-- Une application native avec React Native
-- Une application hybride avec Capacitor/Cordova
+- Informations du restaurant
+- Liste du personnel
+- Prévisions d'activité
+- Planning existant
 
-## Fonctionnalités à venir
+### Modèles de services
 
-- Système de notification par email/SMS
-- Intégration avec les systèmes de caisse
-- Module de gestion des paies
-- Statistiques avancées
-- Application mobile dédiée
+La génération automatique des plannings utilise des modèles prédéfinis pour les services (déjeuner et dîner). Vous pouvez personnaliser ces modèles dans la fonction `genererPlanning()` du fichier `src/utils/planningUtils.js`.
 
-## Licence
+## 📱 Versions mobiles
 
-Ce projet est sous licence MIT.
+L'application peut être adaptée pour une utilisation mobile de plusieurs façons:
+
+1. **Progressive Web App (PWA)** : L'application actuelle peut être transformée en PWA avec quelques configurations supplémentaires.
+
+2. **Application native** : Le code peut être adapté pour React Native afin de créer une application mobile native.
+
+3. **Application hybride** : Utilisation de Capacitor ou Cordova pour encapsuler l'application web dans une application mobile.
+
+## 📖 Utilisation
+
+### Tableau de bord
+
+Le tableau de bord fournit une vue d'ensemble de la semaine en cours avec:
+- Statistiques du personnel
+- Planning hebdomadaire
+- Alertes importantes
+
+### Gestion du personnel
+
+Cette section permet de:
+- Ajouter de nouveaux employés
+- Modifier les informations du personnel existant
+- Gérer les disponibilités et compétences
+- Planifier les congés
+
+### Génération automatique
+
+Pour générer un planning automatiquement:
+1. Accédez au tableau de bord
+2. Sélectionnez la semaine désirée
+3. Cliquez sur "Générer Planning Automatique"
+
+Le système créera un planning optimisé en tenant compte:
+- Des disponibilités du personnel
+- Des compétences requises
+- Des contraintes légales
+- Des prévisions d'activité
+
+## 🤝 Contribution
+
+Les contributions sont les bienvenues! N'hésitez pas à ouvrir une issue ou soumettre une pull request.
+
+## 📄 Licence
+
+Ce projet est sous licence MIT. Voir le fichier [LICENSE](LICENSE) pour plus de détails.
