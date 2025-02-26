@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { getJourSemaine, formaterDate, genererPlanning } from '../utils/planningUtils';
+import { usePlanningContext } from '../store/PlanningContext';
+import { getJourSemaine, formaterDate } from '../utils/planningUtils';
 import './PlanningHebdomadaire.css';
 
 /**
@@ -9,11 +10,11 @@ import './PlanningHebdomadaire.css';
  * @param {string} props.semaine - Date de début de semaine au format YYYY-MM-DD
  * @param {Object} props.donnees - Données globales de l'application
  * @param {Function} props.onSelectDate - Fonction appelée lors de la sélection d'une date
- * @param {Function} props.onUpdatePlanning - Fonction appelée lors de la mise à jour du planning
  */
-const PlanningHebdomadaire = ({ semaine, donnees, onSelectDate, onUpdatePlanning }) => {
+const PlanningHebdomadaire = ({ semaine, donnees, onSelectDate }) => {
   const [showModal, setShowModal] = useState(false);
   const [selectedService, setSelectedService] = useState(null);
+  const { ajouterServices } = usePlanningContext();
 
   // Générer les jours de la semaine
   const joursPlanning = React.useMemo(() => {
@@ -43,9 +44,15 @@ const PlanningHebdomadaire = ({ semaine, donnees, onSelectDate, onUpdatePlanning
 
   // Générer un planning automatique
   const handleGenererPlanning = () => {
-    if (onUpdatePlanning) {
-      const planning = genererPlanning(semaine, donnees);
-      onUpdatePlanning(planning);
+    // Importer la fonction du module utilitaire
+    const { genererPlanning } = require('../utils/planningUtils');
+    
+    // Générer le nouveau planning
+    const nouveauxServices = genererPlanning(semaine, donnees);
+    
+    // Ajouter les nouveaux services au planning
+    if (ajouterServices && nouveauxServices.length > 0) {
+      ajouterServices(nouveauxServices);
     }
   };
 
