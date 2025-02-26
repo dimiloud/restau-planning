@@ -1,0 +1,245 @@
+/* Styles pour le composant PlanningExcelStyle */
+
+.planning-excel {
+  margin-top: 30px;
+  background-color: white;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.planning-excel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.planning-excel-header h2 {
+  margin: 0;
+  color: #2c3e50;
+  font-size: 1.4rem;
+}
+
+.btn-generer {
+  background-color: #27ae60;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 8px 16px;
+  cursor: pointer;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: background-color 0.2s;
+}
+
+.btn-generer:hover {
+  background-color: #219653;
+}
+
+/* Table de planning */
+.planning-excel-table {
+  overflow-x: auto;
+  max-width: 100%;
+}
+
+.planning-excel table {
+  width: 100%;
+  border-collapse: collapse;
+  border: 1px solid #ddd;
+  font-size: 0.9rem;
+}
+
+.planning-excel th,
+.planning-excel td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: center;
+}
+
+.planning-excel th {
+  background-color: #f2f2f2;
+  font-weight: 600;
+  color: #333;
+  position: sticky;
+  top: 0;
+}
+
+.planning-excel .employee-col {
+  width: 150px;
+  text-align: left;
+  font-weight: 500;
+}
+
+.planning-excel .poste-col {
+  width: 120px;
+  text-align: left;
+  color: #555;
+}
+
+.planning-excel .jour-col {
+  min-width: 120px;
+}
+
+.planning-excel .jour-header {
+  font-weight: bold;
+}
+
+.planning-excel .jour-date {
+  font-size: 0.8rem;
+  color: #666;
+  margin-top: 3px;
+}
+
+.planning-excel tbody tr:nth-child(even) {
+  background-color: #f8f9fa;
+}
+
+.planning-excel tbody tr:hover {
+  background-color: #f1f5f9;
+}
+
+/* Cellules de service */
+.service-cell {
+  background-color: #f5f5f5;
+  border-radius: 4px;
+  padding: 5px;
+  margin: 3px 0;
+  cursor: pointer;
+  transition: transform 0.1s;
+}
+
+.service-cell:hover {
+  transform: scale(1.03);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.service-poste {
+  font-size: 0.75rem;
+  color: #666;
+}
+
+/* Couleurs par poste */
+.service-cell.cuisine {
+  background-color: #ffeceb;
+  border-left: 3px solid #e74c3c;
+}
+
+.service-cell.service {
+  background-color: #ebf5ff;
+  border-left: 3px solid #3498db;
+}
+
+.service-cell.bar {
+  background-color: #fff5e6;
+  border-left: 3px solid #f39c12;
+}
+
+.service-cell.accueil {
+  background-color: #f5ebff;
+  border-left: 3px solid #9b59b6;
+}
+
+.service-cell.nettoyage {
+  background-color: #ebfff0;
+  border-left: 3px solid #2ecc71;
+}
+
+/* Modal */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background-color: white;
+  border-radius: 8px;
+  padding: 20px;
+  width: 400px;
+  max-width: 90%;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.modal-content h3 {
+  margin-top: 0;
+  margin-bottom: 20px;
+  color: #2c3e50;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 10px;
+}
+
+.service-details p {
+  margin: 8px 0;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.btn-annuler,
+.btn-editer {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.btn-annuler {
+  background-color: #eee;
+  color: #333;
+}
+
+.btn-editer {
+  background-color: #3498db;
+  color: white;
+}
+
+.btn-editer:hover {
+  background-color: #2980b9;
+}
+
+/* Responsive design */
+@media (max-width: 992px) {
+  .planning-excel-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  
+  .planning-excel table {
+    font-size: 0.8rem;
+  }
+  
+  .planning-excel .jour-col {
+    min-width: 100px;
+  }
+}
+
+@media (max-width: 768px) {
+  .planning-excel th,
+  .planning-excel td {
+    padding: 5px;
+  }
+  
+  .service-cell {
+    padding: 3px;
+    font-size: 0.75rem;
+  }
+  
+  .service-poste {
+    display: none;
+  }
+}
