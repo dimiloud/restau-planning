@@ -163,13 +163,16 @@ export const PlanningProvider = ({ children }) => {
    */
   const ajouterServices = (services) => {
     // Trouver le prochain ID disponible
-    const maxId = Math.max(...donnees.plannings.services.map(s => s.id), 0);
+    const maxId = Math.max(...donnees.plannings.services.map(s => s.id || 0), 0);
     
-    // Ajouter des IDs aux nouveaux services
+    // Ajouter des IDs aux nouveaux services s'ils n'en ont pas déjà
     const servicesAvecIds = services.map((service, index) => ({
       ...service,
-      id: maxId + index + 1
+      id: service.id || (maxId + index + 1)
     }));
+    
+    // Log pour le debug
+    console.log("Ajout de", servicesAvecIds.length, "nouveaux services");
     
     setDonnees(prevDonnees => ({
       ...prevDonnees,
