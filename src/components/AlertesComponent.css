@@ -1,0 +1,137 @@
+/* Styles pour le composant AlertesComponent */
+
+.alertes-component {
+  margin-top: 30px;
+  background-color: white;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.alertes-component h2 {
+  margin-top: 0;
+  color: #2c3e50;
+  font-size: 1.4rem;
+  margin-bottom: 20px;
+}
+
+.alertes-section {
+  margin-bottom: 30px;
+}
+
+.alertes-section:last-child {
+  margin-bottom: 0;
+}
+
+.alertes-section h3 {
+  color: #333;
+  font-size: 1.1rem;
+  margin-top: 0;
+  margin-bottom: 15px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.badge {
+  background-color: #3498db;
+  color: white;
+  padding: 2px 6px;
+  border-radius: 10px;
+  font-size: 0.7rem;
+  font-weight: bold;
+}
+
+.badge.error {
+  background-color: #e74c3c;
+}
+
+.alertes-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.alerte-item {
+  background-color: #f8f9fa;
+  border-left: 4px solid #3498db;
+  border-radius: 4px;
+  padding: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.alerte-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.alerte-item.urgent {
+  border-left-color: #f39c12;
+}
+
+.alerte-item.error {
+  border-left-color: #e74c3c;
+}
+
+.alerte-info {
+  flex: 1;
+}
+
+.alerte-titre {
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 3px;
+}
+
+.alerte-desc {
+  font-size: 0.85rem;
+  color: #666;
+}
+
+.alerte-badge {
+  background-color: #3498db;
+  color: white;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  min-width: 80px;
+  text-align: center;
+}
+
+.alerte-badge.error {
+  background-color: #e74c3c;
+}
+
+.alerte-item.urgent .alerte-badge {
+  background-color: #f39c12;
+}
+
+.aucune-alerte {
+  text-align: center;
+  color: #999;
+  font-style: italic;
+  padding: 15px;
+  background-color: #f8f9fa;
+  border-radius: 4px;
+  font-size: 0.9rem;
+}
+
+@media (max-width: 768px) {
+  .alertes-component {
+    padding: 15px;
+  }
+  
+  .alerte-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  
+  .alerte-badge {
+    align-self: flex-start;
+  }
+}
