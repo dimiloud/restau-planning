@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { usePlanningContext } from '../store/PlanningContext';
 import { formaterDate, getJourSemaine, getCongesAVenir } from '../utils/planningUtils';
 import PlanningHebdomadaire from './PlanningHebdomadaire';
+import PlanningExcelStyle from './PlanningExcelStyle';
 import AlertesComponent from './AlertesComponent';
 import './TableauDeBord.css';
 
@@ -16,6 +17,7 @@ const TableauDeBord = ({ onChangerDate }) => {
   const { donnees, setDateSelectionnee, ajouterServices } = usePlanningContext();
   const [semaineAffichee, setSemaineAffichee] = useState(donnees.plannings.semaineActuelle);
   const [dateSelectionnee, setDateSelectionneeLocale] = useState(formaterDate(new Date()));
+  const [viewMode, setViewMode] = useState('excel'); // 'excel' ou 'cards'
   
   // Mettre à jour la date sélectionnée quand elle change
   useEffect(() => {
@@ -64,6 +66,11 @@ const TableauDeBord = ({ onChangerDate }) => {
     setDateSelectionneeLocale(date);
   };
 
+  // Fonction pour basculer entre les modes d'affichage
+  const toggleViewMode = () => {
+    setViewMode(prev => prev === 'excel' ? 'cards' : 'excel');
+  };
+
   return (
     <div className="tableau-bord">
       <h1>{donnees.restaurant.nom} - Tableau de bord</h1>
@@ -95,11 +102,30 @@ const TableauDeBord = ({ onChangerDate }) => {
         </div>
       </div>
       
-      <PlanningHebdomadaire 
-        semaine={semaineAffichee} 
-        donnees={donnees}
-        onSelectDate={handleSelectDate}
-      />
+      <div className="view-toggle">
+        <button 
+          className={`view-toggle-btn ${viewMode === 'excel' ? 'active' : ''}`}
+          onClick={() => setViewMode('excel')}
+        >
+          Vue Excel
+        </button>
+        <button 
+          className={`view-toggle-btn ${viewMode === 'cards' ? 'active' : ''}`}
+          onClick={() => setViewMode('cards')}
+        >
+          Vue Carte
+        </button>
+      </div>
+      
+      {viewMode === 'excel' ? (
+        <PlanningExcelStyle semaine={semaineAffichee} />
+      ) : (
+        <PlanningHebdomadaire 
+          semaine={semaineAffichee} 
+          donnees={donnees}
+          onSelectDate={handleSelectDate}
+        />
+      )}
       
       <AlertesComponent donnees={donnees} />
     </div>
