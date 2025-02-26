@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
-import { PlanningProvider } from './store/PlanningContext';
+import { PlanningProvider, usePlanningContext } from './store/PlanningContext';
 import TableauDeBord from './components/TableauDeBord';
 import PersonnelList from './components/PersonnelList';
 import ParametresView from './views/ParametresView';
