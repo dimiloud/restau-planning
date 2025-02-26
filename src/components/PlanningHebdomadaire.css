@@ -1,0 +1,231 @@
+/* Styles pour le composant PlanningHebdomadaire */
+
+.planning-hebdomadaire {
+  margin-top: 30px;
+  background-color: white;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.planning-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.planning-header h2 {
+  margin: 0;
+  color: #2c3e50;
+  font-size: 1.4rem;
+}
+
+.btn-generer {
+  background-color: #27ae60;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 8px 16px;
+  cursor: pointer;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: background-color 0.2s;
+}
+
+.btn-generer:hover {
+  background-color: #219653;
+}
+
+.btn-generer:before {
+  content: "+";
+  font-size: 1.2em;
+}
+
+/* Conteneur des jours */
+.jours-container {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 10px;
+}
+
+/* Jour individuel */
+.jour-planning {
+  background-color: #f9f9f9;
+  border-radius: 6px;
+  padding: 10px;
+  min-height: 150px;
+  cursor: pointer;
+  border: 1px solid #eee;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.jour-planning:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.jour-planning h3 {
+  text-align: center;
+  font-size: 0.95rem;
+  margin-top: 0;
+  margin-bottom: 10px;
+  color: #333;
+  border-bottom: 1px dashed #ddd;
+  padding-bottom: 5px;
+}
+
+.jour-planning h3 span {
+  font-weight: bold;
+  color: #3498db;
+}
+
+/* Liste des services */
+.services-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* Service individuel */
+.service-item {
+  background-color: white;
+  padding: 8px;
+  border-radius: 4px;
+  border-left: 4px solid #ccc;
+  font-size: 0.8rem;
+  cursor: pointer;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.service-item:hover {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Couleurs par poste */
+.service-item.cuisine { border-left-color: #e74c3c; }
+.service-item.service { border-left-color: #3498db; }
+.service-item.bar { border-left-color: #f39c12; }
+.service-item.accueil { border-left-color: #9b59b6; }
+.service-item.nettoyage { border-left-color: #2ecc71; }
+
+.horaire {
+  font-weight: bold;
+  font-size: 0.75rem;
+  color: #555;
+}
+
+.employe {
+  font-weight: 500;
+  color: #333;
+}
+
+.poste {
+  font-size: 0.7rem;
+  color: #777;
+  background-color: #f5f5f5;
+  display: inline-block;
+  padding: 2px 6px;
+  border-radius: 3px;
+  margin-top: 3px;
+}
+
+.aucun-service {
+  text-align: center;
+  color: #999;
+  font-style: italic;
+  padding: 15px 0;
+  font-size: 0.8rem;
+}
+
+/* Modal pour édition de service */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background-color: white;
+  border-radius: 8px;
+  padding: 20px;
+  width: 400px;
+  max-width: 90%;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.modal-content h3 {
+  margin-top: 0;
+  color: #2c3e50;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 10px;
+}
+
+.service-details {
+  margin-bottom: 20px;
+}
+
+.service-details p {
+  margin: 8px 0;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.btn-annuler {
+  background-color: #eee;
+  color: #333;
+  border: none;
+  border-radius: 4px;
+  padding: 8px 16px;
+  cursor: pointer;
+}
+
+.btn-editer {
+  background-color: #3498db;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 8px 16px;
+  cursor: pointer;
+}
+
+.btn-editer:hover {
+  background-color: #2980b9;
+}
+
+/* Responsive design */
+@media (max-width: 1024px) {
+  .jours-container {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .jours-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .planning-header {
+    flex-direction: column;
+    gap: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .jours-container {
+    grid-template-columns: 1fr;
+  }
+}
