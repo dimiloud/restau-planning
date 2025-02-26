@@ -130,7 +130,7 @@ export function genererPlanning(dateDebut, donnees) {
   const dateDebutObj = new Date(dateDebut);
   
   // ID pour les nouveaux services
-  let nextId = Math.max(...donnees.plannings.services.map(s => s.id), 0) + 1;
+  let nextId = Math.max(...donnees.plannings.services.map(s => s.id || 0), 0) + 1;
   
   // Pour chaque jour de la semaine
   for (let i = 0; i < 7; i++) {
@@ -271,9 +271,10 @@ export function verifierContraintesLegales(services, donnees) {
   // Vérifier les contraintes pour chaque employé
   employesMap.forEach((jours, employeId) => {
     const employe = donnees.personnel.find(e => e.id === employeId);
+    if (!employe) return;
     
     // Calculer les heures hebdomadaires
-    let semaines = new Map();
+    const semaines = new Map();
     jours.forEach((servicesJour, date) => {
       const dateSemaine = getSemaineAnnee(date);
       if (!semaines.has(dateSemaine)) {
@@ -281,9 +282,10 @@ export function verifierContraintesLegales(services, donnees) {
       }
       
       servicesJour.forEach(service => {
+        const heures = calculerHeures(service.heureDebut, service.heureFin);
         semaines.set(
           dateSemaine, 
-          semaines.get(dateSemaine) + calculerHeures(service.heureDebut, service.heureFin)
+          semaines.get(dateSemaine) + heures
         );
       });
     });
@@ -310,6 +312,10 @@ export function verifierContraintesLegales(services, donnees) {
       
       const servicesJourActuel = jours.get(dateActuelle);
       const servicesJourSuivant = jours.get(dateSuivante);
+      
+      if (servicesJourActuel.length === 0 || servicesJourSuivant.length === 0) {
+        continue;
+      }
       
       // Trouver le service qui finit le plus tard ce jour
       const dernierService = servicesJourActuel.reduce((last, current) => {
@@ -341,7 +347,7 @@ export function verifierContraintesLegales(services, donnees) {
           message: `Repos insuffisant entre ${dateActuelle} et ${dateSuivante} (${reposHeures.toFixed(1)}h)`
         });
       }
-    });
+    }
   });
   
   return infractions;
