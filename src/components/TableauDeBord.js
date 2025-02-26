@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { usePlanningContext } from '../store/PlanningContext';
 import { formaterDate, getJourSemaine, getCongesAVenir } from '../utils/planningUtils';
 import PlanningHebdomadaire from './PlanningHebdomadaire';
 import AlertesComponent from './AlertesComponent';
@@ -8,19 +9,24 @@ import './TableauDeBord.css';
  * Composant de tableau de bord principal
  * Affiche une vue d'ensemble du restaurant, le planning et les alertes
  * 
- * @param {Object} props.donnees - Données globales de l'application 
+ * @param {Object} props
  * @param {Function} props.onChangerDate - Fonction appelée lors du changement de date
  */
-const TableauDeBord = ({ donnees, onChangerDate }) => {
+const TableauDeBord = ({ onChangerDate }) => {
+  const { donnees, setDateSelectionnee, ajouterServices } = usePlanningContext();
   const [semaineAffichee, setSemaineAffichee] = useState(donnees.plannings.semaineActuelle);
-  const [dateSelectionnee, setDateSelectionnee] = useState(formaterDate(new Date()));
+  const [dateSelectionnee, setDateSelectionneeLocale] = useState(formaterDate(new Date()));
   
   // Mettre à jour la date sélectionnée quand elle change
   useEffect(() => {
     if (onChangerDate) {
       onChangerDate(dateSelectionnee);
     }
-  }, [dateSelectionnee, onChangerDate]);
+    
+    if (setDateSelectionnee) {
+      setDateSelectionnee(dateSelectionnee);
+    }
+  }, [dateSelectionnee, onChangerDate, setDateSelectionnee]);
 
   // Fonctions pour naviguer entre les semaines
   const semainePrecedente = () => {
@@ -52,6 +58,11 @@ const TableauDeBord = ({ donnees, onChangerDate }) => {
     acc[service.poste] = (acc[service.poste] || 0) + 1;
     return acc;
   }, {});
+
+  // Fonction pour gérer la sélection d'une date
+  const handleSelectDate = (date) => {
+    setDateSelectionneeLocale(date);
+  };
 
   return (
     <div className="tableau-bord">
@@ -87,7 +98,7 @@ const TableauDeBord = ({ donnees, onChangerDate }) => {
       <PlanningHebdomadaire 
         semaine={semaineAffichee} 
         donnees={donnees}
-        onSelectDate={setDateSelectionnee}
+        onSelectDate={handleSelectDate}
       />
       
       <AlertesComponent donnees={donnees} />
